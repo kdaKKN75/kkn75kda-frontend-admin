@@ -24,8 +24,6 @@ const ListResident = () => {
         fetchData();
     }, [data, filter]);
 
-    console.log(filter);
-
     return (
         <section>
             <h1 className="text-2xl font-bold mb-5">Daftar Penduduk</h1>
