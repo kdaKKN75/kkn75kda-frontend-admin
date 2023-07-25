@@ -1,7 +1,7 @@
 import DataTable from 'react-data-table-component';
 import ExpandTable from './ExpandTable';
 
-const Table = ({ expandTable = true, columns, data }) => {
+const Table = ({ expandTable = true }) => {
     const columns = [
         {
             name: '#',
