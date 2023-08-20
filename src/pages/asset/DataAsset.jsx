@@ -17,7 +17,7 @@ const DataAsset = () => {
             name: '#',
             width: '3rem',
             center: true,
-            cell: (row) => row.id,
+            cell: (row) => row.no,
         },
         {
             name: 'Action',
@@ -87,6 +87,9 @@ const DataAsset = () => {
     const fetchData = async () => {
         try {
             const res = await clientPrivate.get('/data-asset');
+            res.data.data.assets.forEach((asset, index) => {
+                asset.no = index + 1;
+            });
             setData(res.data.data.assets);
             setFilterData(res.data.data.assets);
         } catch (error) {

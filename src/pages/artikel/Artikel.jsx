@@ -39,7 +39,7 @@ const Artikel = () => {
             const res = await client.get('/artikel');
             if (res.data.status === true) {
                 res.data.data.artikels.forEach((artikel, index) => {
-                    artikel.id = index + 1;
+                    artikel.no = index + 1;
                 });
                 setArtikel(res.data.data.artikels);
             } else {
@@ -55,7 +55,7 @@ const Artikel = () => {
         {
             name: '#',
             width: '3rem',
-            cell: (row) => row.id,
+            cell: (row) => row.no,
         },
         {
             name: 'Action',

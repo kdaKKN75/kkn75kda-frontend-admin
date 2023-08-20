@@ -14,6 +14,9 @@ const Agenda = () => {
         try {
             const res = await client.get('/agenda');
             if (res.data.status === true) {
+                res.data.data.agenda.forEach((agenda, index) => {
+                    agenda.no = index + 1;
+                });
                 setData(res.data.data.agenda);
                 setFilterData(res.data.data.agenda);
             }
@@ -50,7 +53,7 @@ const Agenda = () => {
         {
             name: '#',
             width: '3rem',
-            cell: (row) => row.id,
+            cell: (row) => row.no,
         },
         {
             name: 'Action',
@@ -130,7 +133,7 @@ const Agenda = () => {
                     />
                 </div>
             </div>
-            <Table columns={columns} data={filterData} expandTable={true} />
+            <Table columns={columns} data={filterData} />
         </section>
     );
 };
