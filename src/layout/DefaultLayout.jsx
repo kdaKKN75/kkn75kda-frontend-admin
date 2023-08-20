@@ -8,7 +8,7 @@ const DefaultLayout = () => {
 
     return (
         <div>
-            <div className="flex h-screen overflow-hidden noo-scroll">
+            <div className="flex h-screen overflow-hidden no-scroll">
                 <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
                 <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">

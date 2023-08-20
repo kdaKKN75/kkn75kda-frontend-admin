@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BiX, BiHome, BiUser } from 'react-icons/bi';
+import { BiX, BiHome, BiUser, BiBookContent, BiCoinStack, BiGroup, BiNotepad } from 'react-icons/bi';
 import SidebarLinkGroup from './SidebarLinkGroup';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -51,7 +51,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             }`}
         >
             <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-                <h1 className="text-title-sm font-bold text-meta-3">Koncer Darul Aman</h1>
+                <Link to="/">
+                    <h1 className="text-title-sm font-bold text-meta-3">Koncer Darul Aman</h1>
+                </Link>
+
                 <button
                     ref={trigger}
                     onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -68,7 +71,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <li className="list-none">
                         <Link
                             to="/"
-                            className={`group relative flex items-center gap-2.5 rounded-sm mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
+                            className={`group relative flex items-center gap-2.5 rounded mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
                                 pathname == '/' && 'bg-meta-3'
                             }`}
                         >
@@ -77,15 +80,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         </Link>
                         <ul className="mb-3 flex flex-col gap-1.5">
                             <SidebarLinkGroup
-                                activeCondition={pathname == '/penduduk' || pathname.includes('penduduk')}
+                                activeCondition={
+                                    pathname == '/penduduk' ||
+                                    pathname.includes('penduduk') ||
+                                    pathname == '/data-asset' ||
+                                    pathname.includes('data-asset')
+                                }
                             >
                                 {(handleClick, open) => {
                                     return (
                                         <>
                                             <Link
                                                 to="#"
-                                                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                                                    (pathname == '/penduduk' || pathname.includes('penduduk')) &&
+                                                className={`group relative flex items-center gap-2.5 rounded py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                                                    (pathname == '/penduduk' ||
+                                                        pathname.includes('penduduk') ||
+                                                        pathname == '/data-asset' ||
+                                                        pathname.includes('/data-asset')) &&
                                                     'bg-meta-3'
                                                 }`}
                                                 onClick={(e) => {
@@ -94,7 +105,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                                 }}
                                             >
                                                 <BiUser />
-                                                Penduduk
+                                                Kependudukan
                                                 <svg
                                                     className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                                                         open && 'rotate-180'
@@ -114,17 +125,34 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                                 </svg>
                                             </Link>
                                             <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
-                                                <ul className="mt-2 mb-5.5 flex flex-col gap-2.5 pl-6">
+                                                <ul className="mt-2 mb-2 flex flex-col gap-2.5 pl-6">
                                                     <li>
                                                         <Link
-                                                            to="/penduduk/daftar-penduduk"
+                                                            to="/penduduk"
                                                             className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:text-white ${
-                                                                pathname == '/penduduk/daftar-penduduk'
+                                                                pathname == '/penduduk' || pathname.includes('penduduk')
                                                                     ? 'text-white'
                                                                     : 'text-bodydark2'
                                                             }`}
                                                         >
-                                                            List Penduduk
+                                                            Daftar Penduduk
+                                                        </Link>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div className={`translate transform overflow-hidden ${!open && 'hidden'}`}>
+                                                <ul className="mt-2 mb-2 flex flex-col gap-2.5 pl-6">
+                                                    <li>
+                                                        <Link
+                                                            to="/data-asset"
+                                                            className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium duration-300 ease-in-out hover:text-white ${
+                                                                pathname == '/data-asset' ||
+                                                                pathname.includes('data-asset')
+                                                                    ? 'text-white'
+                                                                    : 'text-bodydark2'
+                                                            }`}
+                                                        >
+                                                            Daftar Asset
                                                         </Link>
                                                     </li>
                                                 </ul>
@@ -134,6 +162,42 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 }}
                             </SidebarLinkGroup>
                         </ul>
+                        <Link
+                            to="/artikel"
+                            className={`group relative flex items-center gap-2.5 rounded mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
+                                (pathname == '/artikel' || pathname.includes('artikel')) && 'bg-meta-3'
+                            }`}
+                        >
+                            <BiBookContent />
+                            Artikel
+                        </Link>
+                        <Link
+                            to="/agenda"
+                            className={`group relative flex items-center gap-2.5 rounded mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
+                                (pathname == '/agenda' || pathname.includes('agenda')) && 'bg-meta-3'
+                            }`}
+                        >
+                            <BiNotepad />
+                            Agenda
+                        </Link>
+                        <Link
+                            to="/perangkat-desa"
+                            className={`group relative flex items-center gap-2.5 rounded mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
+                                (pathname == '/perangkat-desa' || pathname.includes('perangkat-desa')) && 'bg-meta-3'
+                            }`}
+                        >
+                            <BiGroup />
+                            Perangkat Desa
+                        </Link>
+                        <Link
+                            to="/master"
+                            className={`group relative flex items-center gap-2.5 rounded mb-3 py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-meta-3 ${
+                                (pathname == '/master' || pathname.includes('master')) && 'bg-meta-3'
+                            }`}
+                        >
+                            <BiCoinStack />
+                            Master Data
+                        </Link>
                     </li>
                 </nav>
             </div>
