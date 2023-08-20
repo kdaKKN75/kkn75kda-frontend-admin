@@ -12,7 +12,8 @@ const Agenda = () => {
 
     const fetchData = async () => {
         try {
-            const res = await client.get('/agenda');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/agenda', { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 res.data.data.agenda.forEach((agenda, index) => {
                     agenda.no = index + 1;
@@ -35,7 +36,8 @@ const Agenda = () => {
             confirmButtonColor: 'red',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await client.delete(`/agenda/${id}`);
+                const token = localStorage.getItem('token');
+                const res = await client.delete(`/agenda/${id}`, { headers: { Authorization: `Bearer ${token}` } });
                 if (res.data.status === true) {
                     Swal.fire('Agenda Berhasil Dihapus!', '', 'success');
                     window.location.reload();

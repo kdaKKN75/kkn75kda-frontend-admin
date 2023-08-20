@@ -30,8 +30,9 @@ const CreatePenduduk = () => {
         };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.post('/data-asset/import', payload, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
             });
 
             if (res.data.status === true) {
@@ -59,7 +60,10 @@ const CreatePenduduk = () => {
         };
 
         try {
-            const res = await client.post('/penduduk', payload, { headers: { 'Content-Type': 'application/json' } });
+            const token = localStorage.getItem('token');
+            const res = await client.post('/penduduk', payload, {
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            });
 
             if (res.data.status === true) {
                 toast.success('Penduduk Berhasil Ditambahkan!');

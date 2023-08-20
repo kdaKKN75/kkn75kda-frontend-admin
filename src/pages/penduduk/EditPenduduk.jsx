@@ -27,7 +27,8 @@ const EditPenduduk = () => {
 
     const fetchPendidikan = async () => {
         try {
-            const res = await client.get('/pendidikan');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/pendidikan', { headers: { Authorization: `Bearer ${token}` } });
             setListPendidikan(res.data.data.pendidikan);
         } catch (error) {
             console.log(error);
@@ -36,7 +37,8 @@ const EditPenduduk = () => {
 
     const fetchPekerjaan = async () => {
         try {
-            const res = await client.get('/pekerjaan');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/pekerjaan', { headers: { Authorization: `Bearer ${token}` } });
             setListPekerjaan(res.data.data.pekerjaan);
         } catch (error) {
             console.log(error);
@@ -45,7 +47,8 @@ const EditPenduduk = () => {
 
     const fetchPenduduk = async () => {
         try {
-            const res = await client.get(`/penduduk/${id}`);
+            const token = localStorage.getItem('token');
+            const res = await client.get(`/penduduk/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             setPenduduk(res.data.data.resident[0]);
         } catch (error) {
             console.log(error);
@@ -72,8 +75,9 @@ const EditPenduduk = () => {
         };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.put(`/penduduk/${id}`, payload, {
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
             });
 
             if (res.data.status === true) {

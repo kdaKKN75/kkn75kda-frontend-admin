@@ -14,7 +14,8 @@ const EditPerangkat = () => {
 
     const fetchPerangkat = async () => {
         try {
-            const res = await client.get(`/perangkat-desa/${id}`);
+            const token = localStorage.getItem('token');
+            const res = await client.get(`/perangkat-desa/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 setNama(res.data.data.perangkatDesa.nama);
                 setJabatan(res.data.data.perangkatDesa.jabatan);
@@ -29,8 +30,9 @@ const EditPerangkat = () => {
         const payload = { nama: nama, jabatan: jabatan, photo: photo };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.put(`/perangkat-desa/${id}`, payload, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
             });
 
             if (res.data.status === true) {

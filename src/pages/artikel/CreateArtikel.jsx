@@ -23,7 +23,8 @@ const CreateArtikel = () => {
         };
 
         try {
-            const res = await client.post('/artikel', payload, { headers: { 'Content-Type': 'multipart/form-data' } });
+            const token = localStorage.getItem('token');
+            const res = await client.post('/artikel', payload, { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 toast.success('Berhasil Membuat Artikel!');
                 setTimeout(() => {

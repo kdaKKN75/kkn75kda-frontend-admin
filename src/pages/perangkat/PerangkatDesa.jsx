@@ -34,7 +34,8 @@ const PerangkatDesa = () => {
 
     const fetchPerangkat = async () => {
         try {
-            const res = await client.get('/perangkat-desa');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/perangkat-desa', { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 setPerangkat(res.data.data.perangkatDesa);
             }
@@ -47,8 +48,9 @@ const PerangkatDesa = () => {
         const payload = { photo: file, nama: nama, jabatan: jabatan };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.post('/perangkat-desa', payload, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
             });
             if (res.data.status === true) {
                 toast.success('Perangkat Desa Berhasil Ditambahkan!');
@@ -79,7 +81,10 @@ const PerangkatDesa = () => {
             confirmButtonColor: 'red',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await client.delete(`/perangkat-desa/${id}`);
+                const token = localStorage.getItem('token');
+                const res = await client.delete(`/perangkat-desa/${id}`, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
                 if (res.data.status === true) {
                     Swal.fire('Perangkat Berhasil Dihapus!', '', 'success');
                     window.location.reload();

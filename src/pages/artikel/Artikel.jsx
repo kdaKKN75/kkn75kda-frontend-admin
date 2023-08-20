@@ -20,7 +20,8 @@ const Artikel = () => {
             confirmButtonColor: 'red',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await client.delete(`/artikel/${id}`);
+                const token = localStorage.getItem('token');
+                const res = await client.delete(`/artikel/${id}`, { headers: { Authorization: `Bearer ${token}` } });
                 if (res.data.status === true) {
                     Swal.fire('Artikel Berhasil Dihapus!', '', 'success');
                     window.location.reload();
@@ -36,7 +37,8 @@ const Artikel = () => {
 
     const fetchArtikel = async () => {
         try {
-            const res = await client.get('/artikel');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/artikel', { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 res.data.data.artikels.forEach((artikel, index) => {
                     artikel.no = index + 1;

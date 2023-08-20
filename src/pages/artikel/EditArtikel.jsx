@@ -16,7 +16,8 @@ const EditArtikel = () => {
 
     const fetchArtikel = async () => {
         try {
-            const res = await client.get(`/artikel/${id}`);
+            const token = localStorage.getItem('token');
+            const res = await client.get(`/artikel/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 setTitle(res.data.data.artikel[0].judul);
                 setBody(res.data.data.artikel[0].isi);
@@ -43,8 +44,9 @@ const EditArtikel = () => {
         };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.put(`/artikel/${id}`, payload, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
             });
             if (res.data.status === true) {
                 toast.success('Berhasil Edit Artikel!');

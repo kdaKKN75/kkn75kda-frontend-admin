@@ -21,7 +21,10 @@ const CreateAgenda = () => {
         };
 
         try {
-            const res = await client.post('/agenda', payload, { headers: { 'Content-Type': 'application/json' } });
+            const token = localStorage.getItem('token');
+            const res = await client.post('/agenda', payload, {
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            });
             if (res.data.status === true) {
                 toast.success('Berhasil Membuat Agenda!');
                 setTimeout(() => {

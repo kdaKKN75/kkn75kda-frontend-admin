@@ -16,7 +16,8 @@ const EditAsset = () => {
 
     const fetchAsset = async () => {
         try {
-            const res = await client.get(`/data-asset/${id}`);
+            const token = localStorage.getItem('token');
+            const res = await client.get(`/data-asset/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 setDataAsset(res.data.data.dataAsset[0]);
             }
@@ -35,8 +36,9 @@ const EditAsset = () => {
         };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.put(`/data-asset/${id}`, payload, {
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
             });
 
             if (res.data.status === true) {

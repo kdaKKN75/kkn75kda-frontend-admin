@@ -14,7 +14,8 @@ const EditAgenda = () => {
 
     const fetchAgenda = async () => {
         try {
-            const res = await client.get(`/agenda/${id}`);
+            const token = localStorage.getItem('token');
+            const res = await client.get(`/agenda/${id}`, { headers: { Authorization: `Bearer ${token}` } });
             if (res.data.status === true) {
                 setJudul(res.data.data.agenda.judul);
                 setTempat(res.data.data.agenda.tempat);
@@ -36,7 +37,10 @@ const EditAgenda = () => {
         };
 
         try {
-            const res = await client.put(`/agenda/${id}`, payload, { headers: { 'Content-Type': 'application/json' } });
+            const token = localStorage.getItem('token');
+            const res = await client.put(`/agenda/${id}`, payload, {
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+            });
             if (res.data.status === true) {
                 toast.success('Berhasil Merubah Agenda!');
                 setTimeout(() => {

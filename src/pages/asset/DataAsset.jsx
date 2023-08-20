@@ -70,7 +70,8 @@ const DataAsset = () => {
             confirmButtonColor: 'red',
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const res = await client.delete(`/data-asset/${id}`);
+                const token = localStorage.getItem('token');
+                const res = await client.delete(`/data-asset/${id}`, { headers: { Authorization: `Bearer ${token}` } });
                 if (res.data.status === true) {
                     Swal.fire('Asset Berhasil Dihapus!', '', 'success');
                     window.location.reload();
@@ -86,7 +87,8 @@ const DataAsset = () => {
 
     const fetchData = async () => {
         try {
-            const res = await clientPrivate.get('/data-asset');
+            const token = localStorage.getItem('token');
+            const res = await clientPrivate.get('/data-asset', { headers: { Authorization: `Bearer ${token}` } });
             res.data.data.assets.forEach((asset, index) => {
                 asset.no = index + 1;
             });

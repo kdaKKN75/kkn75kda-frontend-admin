@@ -37,7 +37,8 @@ const CreatePenduduk = () => {
 
     const fetchPendidikan = async () => {
         try {
-            const res = await client.get('/pendidikan');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/pendidikan', { headers: { Authorization: `Bearer ${token}` } });
             setListPendidikan(res.data.data.pendidikan);
         } catch (error) {
             console.log(error);
@@ -46,7 +47,8 @@ const CreatePenduduk = () => {
 
     const fetchPekerjaan = async () => {
         try {
-            const res = await client.get('/pekerjaan');
+            const token = localStorage.getItem('token');
+            const res = await client.get('/pekerjaan', { headers: { Authorization: `Bearer ${token}` } });
             setListPekerjaan(res.data.data.pekerjaan);
         } catch (error) {
             console.log(error);
@@ -59,8 +61,9 @@ const CreatePenduduk = () => {
         };
 
         try {
+            const token = localStorage.getItem('token');
             const res = await client.post('/penduduk/import', payload, {
-                headers: { 'Content-Type': 'multipart/form-data' },
+                headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` },
             });
 
             if (res.data.status === true) {
@@ -99,7 +102,11 @@ const CreatePenduduk = () => {
         };
 
         try {
-            const res = await client.post('/penduduk', payload, { headers: { 'Content-Type': 'application/json' } });
+            const token = localStorage.getItem('token');
+            const res = await client.post('/penduduk', payload, {
+                headers: { 'Content-Type': 'application/json' },
+                Authorization: `Bearer ${token}`,
+            });
 
             if (res.data.status === true) {
                 toast.success('Penduduk Berhasil Ditambahkan!');

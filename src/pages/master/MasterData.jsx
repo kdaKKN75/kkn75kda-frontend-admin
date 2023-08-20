@@ -30,8 +30,9 @@ const MasterData = () => {
                         nama: result.value,
                     };
 
+                    const token = localStorage.getItem('token');
                     const res = await client.put(`/${endpoint}/${id}`, payload, {
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
                     });
                     if (res.data.status === true) {
                         Swal.fire(`${title} Berhasil Diedit!`, '', 'success');
@@ -59,7 +60,10 @@ const MasterData = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    const res = await client.delete(`/${endpoint}/${id}`);
+                    const token = localStorage.getItem('token');
+                    const res = await client.delete(`/${endpoint}/${id}`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    });
                     if (res.data.status === true) {
                         Swal.fire(`${title} Berhasil Dihapus!`, '', 'success');
                     } else {
