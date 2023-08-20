@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import UserOne from '../assets/user.png';
+import UserOne from '../assets/IMG_5689.png';
 import client from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 
