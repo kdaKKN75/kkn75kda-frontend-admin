@@ -10,47 +10,72 @@ const ExpandTable = ({ data }) => {
                         <tr className="h-7">
                             <td>Nama Lengkap</td>
                             <td className="px-10">:</td>
-                            <td>Heri Junianto</td>
+                            <td>{data.namaLengkap}</td>
                         </tr>
                         <tr className="h-7">
                             <td>NIK</td>
                             <td className="px-10">:</td>
-                            <td>3511082511780001</td>
+                            <td>{data.nik}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Jenis Kelamin</td>
                             <td className="px-10">:</td>
-                            <td>Laki - Laki</td>
+                            <td>{data.gender}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Tempat Lahir</td>
                             <td className="px-10">:</td>
-                            <td>Bondowoso</td>
+                            <td>{data.tempat_lahir}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Tanggal Lahir</td>
                             <td className="px-10">:</td>
-                            <td>25-11-1978</td>
+                            <td>{data.tanggal_lahir}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Agama</td>
                             <td className="px-10">:</td>
-                            <td>Islam</td>
+                            <td>{data.agama}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Pendidikan</td>
                             <td className="px-10">:</td>
-                            <td>SLTP</td>
+                            <td>{data.pendidikan}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Pekerjaan</td>
                             <td className="px-10">:</td>
-                            <td>Tukang Becak</td>
+                            <td>{data.pekerjaan}</td>
+                        </tr>
+                        <tr className="h-7">
+                            <td>No.HP</td>
+                            <td className="px-10">:</td>
+                            <td>{data.no_hp}</td>
                         </tr>
                         <tr className="h-7">
                             <td>Status</td>
                             <td className="px-10">:</td>
-                            <td>Menikah</td>
+                            <td>{data.status}</td>
+                        </tr>
+                        <tr className="h-7">
+                            <td>No.KK</td>
+                            <td className="px-10">:</td>
+                            <td>{data.no_kk}</td>
+                        </tr>
+                        <tr className="h-7">
+                            <td>Dusun</td>
+                            <td className="px-10">:</td>
+                            <td>{data.dusun}</td>
+                        </tr>
+                        <tr className="h-7">
+                            <td>RT</td>
+                            <td className="px-10">:</td>
+                            <td>{data.rt}</td>
+                        </tr>
+                        <tr className="h-7">
+                            <td>RW</td>
+                            <td className="px-10">:</td>
+                            <td>{data.rw}</td>
                         </tr>
                     </tbody>
                 </table>
