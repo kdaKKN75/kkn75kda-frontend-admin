@@ -76,7 +76,8 @@ const ListResident = () => {
 
     const fetchData = async () => {
         try {
-            const res = await clientPrivate.get('/penduduk');
+            const token = localStorage.getItem('token');
+            const res = await clientPrivate.get('/penduduk', { headers: { Authorization: `Bearer ${token}` } });
             res.data.data.residents.forEach((resident, index) => {
                 resident.id = index + 1;
             });

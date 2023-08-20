@@ -22,9 +22,11 @@ export const AuthProvider = ({ children }) => {
             });
             if (response.data.status === true) {
                 setStatusLogin(true);
+                const { access_token, refresh_token } = response.data.data;
+                localStorage.setItem('token', access_token);
+                localStorage.setItem('refresh_token', refresh_token);
+                navigate('/');
             }
-
-            navigate('/');
         } catch (error) {
             console.log(error);
         }
